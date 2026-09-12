@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs / Temp
+*.log
+*.tmp
+*.bak
+
+# Node
+node_modules/
+dist/
+
+# Env
+.env
+.env.*

@@ -1,0 +1,50 @@
+name: Sync upstream animal-island-ui skill
+
+on:
+  schedule:
+    # Check the upstream repository every hour.
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream-skill
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Fetch upstream skill
+        run: |
+          git clone --depth 1 \
+            --filter=blob:none \
+            --sparse \
+            https://github.com/guokaigdg/animal-island-ui.git \
+            /tmp/animal-island-ui
+          git -C /tmp/animal-island-ui sparse-checkout set \
+            skills/animal-island-ui-style
+
+      - name: Replace the published skill
+        run: |
+          rm -rf skills/animal-island-ui-style
+          mkdir -p skills
+          cp -R /tmp/animal-island-ui/skills/animal-island-ui-style \
+            skills/animal-island-ui-style
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skills/animal-island-ui-style
+          if git diff --cached --quiet; then
+            echo "Upstream skill is already up to date."
+            exit 0
+          fi
+          git commit -m "chore: sync upstream animal-island-ui skill"
+          git push
