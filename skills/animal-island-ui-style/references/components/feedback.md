@@ -4,19 +4,19 @@ Props/types below are copied from the library source. In an npm-installed projec
 
 ## Progress
 
-Horizontal bar whose fill reuses the **Button loading** stripe: a teal `-45°` ribbon (`#0ec4b6` / `#01b0a7`) scrolling infinitely right-to-left. The track uses the page background (`#f8f8f0`, same as `--animal-bg`) with a light `#e8dcc8` border + soft inner dent. The percent label sits inside the fill (default, white), to the right, or on top.
+Horizontal bar whose fill is a **scene image** (`sweet-corner.svg` default) injected inline at `background-size` equal to the full track width, so the scene spans the whole bar; the fill is clipped from the left by progress width ("unveils from the left"). The track is a **cream dotted** pill (`#f8f8f0` + two cream radial-dot layers, same as Background default / Card pattern-default) with a soft inner dent and no border. The percent label always sits **right of the bar**.
 
 ```ts
 type ProgressSize = 'small' | 'middle' | 'large';
-type ProgressInfoPosition = 'inside' | 'right' | 'top';
+type ProgressVariant = 'sweet-corner' | 'forest-grove' | 'starry-camp' | 'coffee-break';
 
 interface ProgressProps {
     percent: number; // REQUIRED, 0-100, clamped; non-integer rounded for aria
-    size?: ProgressSize; // default 'middle' (small=12px, middle=20px, large=28px)
-    showInfo?: boolean; // default true
-    infoPosition?: ProgressInfoPosition; // default 'inside'
+    size?: ProgressSize; // default 'middle' (small=14px, middle=24px, large=32px)
+    showInfo?: boolean; // default true; label sits right of the bar
+    variant?: ProgressVariant; // fill scene image; default 'sweet-corner'
     infoFormat?: (percent: number) => React.ReactNode; // default `${percent}%`
-    duration?: number; // fill WIDTH transition in seconds; 0 disables; default 0.6 — does NOT affect stripe scroll
+    duration?: number; // fill WIDTH transition in seconds; 0 disables; default 0.6
     className?: string;
     style?: React.CSSProperties;
 }
@@ -24,18 +24,18 @@ interface ProgressProps {
 
 ```tsx
 <Progress percent={50} size="large" />
-<Progress percent={45} infoPosition="right" />          {/* or "inside" (default) / "top" */}
+<Progress percent={45} variant="forest-grove" />          {/* default variant 'sweet-corner' */}
 <Progress percent={50} infoFormat={(p) => `${Math.round(p / 10)} / 10`} />
-<Progress percent={pct} duration={0} />                 {/* no fill-width animation */}
+<Progress percent={pct} duration={0} />                   {/* no fill-width animation */}
 <Progress percent={66} showInfo={false} />
 ```
 
 Notes:
 
 - **Always provide `percent`.** Out-of-range values are clamped to `[0, 100]`. NaN is treated as `0`. The aria value is rounded.
-- **Default `infoPosition="inside"`** — the label rides at the right edge of the fill. If `percent < 18`, the label is **automatically moved outside** the fill (track-end, dark text) to keep white text readable on the sandy track. This is the only "magic" behavior; everything else is purely declarative.
-- **Fill color is fixed** (the same teal stripe as `Button` loading) — there is no `status` / `strokeColor` / `leafAnimated` prop.
-- **Two independent animations**: fill **width** transitions on `percent` change (`duration` prop, default 0.6s, `0` disables) with `cubic-bezier(0.4, 0, 0.2, 1)`; stripe **background-position** scrolls from `0 0` to `-28.28px 0` over 1s linear (matches Button loading 1:1), disabled only under `prefers-reduced-motion: reduce`.
+- **Label position is fixed `right`** — it sits in a flex row after the track, right-aligned (`min-width: 44px`).
+- **Fill scene image is fixed per `variant`** — there is no `status` / `strokeColor` / `leafAnimated` prop.
+- **Fill width transition** animates on `percent` change (`duration` prop, default 0.6s, `0` disables) with `cubic-bezier(0.4, 0, 0.2, 1)`; disabled under `prefers-reduced-motion: reduce`.
 - **Accessibility**: root has `role="progressbar"` with `aria-valuemin=0`, `aria-valuemax=100`, `aria-valuenow=<rounded percent>`, and `aria-valuetext` set to the rendered text when it's a string.
 
 ## Loading
@@ -176,4 +176,4 @@ type TimeProps = React.HTMLAttributes<HTMLDivElement>;
 <Time className="island-clock" aria-label="岛屿时间" />
 ```
 
-Zero-config live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, weekday + `Mon DD` in a date capsule below. Borderless panel on `var(--animal-bg-color)` with 20px radius and `--animal-shadow-sm` elevation, fading in on mount; clock 40px 800 tabular in `var(--animal-text-color)` with a blinking colon; the capsule is a 999px pill on `var(--animal-primary-color-bg)` with an uppercase `var(--animal-primary-color)` weekday. The root is `role="timer"` with `aria-live="off"` so the per-second refresh stays silent to screen readers.
+Zero-config live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, weekday + `Mon DD` in a date capsule below. Borderless panel on `var(--animal-bg-color)` with 20px radius and `--animal-shadow-sm` elevation, fading in on mount; clock 44px 900 tabular in `var(--animal-text-color)` with a blinking colon; the capsule is a 999px pill on `var(--animal-primary-color-bg)` with an uppercase `var(--animal-primary-color)` weekday. The root is `role="timer"` with `aria-live="off"` so the per-second refresh stays silent to screen readers.

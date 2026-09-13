@@ -12,7 +12,7 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 31 components, zero runtime dependencies,
+cozy island-style design — 35 components, zero runtime dependencies,
 CC BY-NC 4.0 (non-commercial use only).
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
@@ -93,7 +93,8 @@ values, defaults — copied from source):
    (CodeBlock excepted).
 9. Motion uses `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 10. Icons come from `<Icon name="..." />` (101 built-in cute icon names) — never emoji, Unicode
-    symbols (✓ ✕ →), hand-rolled SVG, or third-party icon libraries.
+    symbols (✓ ✕ →), hand-rolled SVG, or third-party icon libraries. In generated projects prefer
+    the built-in `<Icon />` components over emoji everywhere you can.
 11. Select is controlled-only (`options` + `value` + `onChange` all required). Controlled
     `Input`/`Switch`/`Checkbox`/`Radio` need `onChange` too.
 12. Prefer library components over raw HTML: no visible native `<button>`, `<input>`,

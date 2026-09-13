@@ -32,7 +32,7 @@ animal-island-ui-style/
 └── references/
     ├── react-project.md         # scenario: React project with the npm package
     ├── standalone-html.md       # scenario: single-file HTML, no build step
-    └── components/              # props references by category (9 files, 30 components)
+    └── components/              # props references by category (9 files, 35 components)
 ```
 
 Exact design values (every hex/px/keyframe) are deliberately not duplicated into the
