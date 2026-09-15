@@ -30,40 +30,6 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
 <Button type="text">Cancel</Button>
 ```
 
-## Icon (+ `ICON_LIST`)
-
-```ts
-import { HeartIcon, type IconName } from 'animal-island-ui';
-
-// IconName = union of all 101 built-in icons, e.g.
-// 'AirplaneIcon' | 'AnchorIcon' | ... | 'HeartIcon' | ... | 'WifiIcon'
-
-interface IconProps {
-    name?: IconName; // one of the 101 built-in cute icons (PascalCase, e.g. 'HeartIcon')
-    icon?: ImportedIcon; // any imported built-in icon component (e.g. `HeartIcon`) — takes precedence over `name`
-    src?: string; // any image URL for raster assets — renders a background-image span
-    size?: number | string; // default 24 — applied to width & height
-    color?: string; // maps to SVG stroke (only applied when passed)
-    strokeWidth?: number | string; // maps to SVG stroke-width (only applied when passed)
-    className?: string;
-    style?: React.CSSProperties;
-    bounce?: boolean; // default false — adds hover bounce animation
-}
-
-// Runtime catalogue for dynamic rendering / pickers (length = 101):
-declare const ICON_LIST: { name: IconName; label: string }[];
-```
-
-```tsx
-import { Icon, HeartIcon } from 'animal-island-ui';
-
-<Icon name="Heart" size={32} />
-<Icon icon={HeartIcon} size={32} color="#e05260" />
-{ICON_LIST.map(({ name, label }) => <Icon key={name} name={name} />)}
-```
-
-Built-in cute icons render as SVGs on a 48×48 viewBox and scale cleanly. Use `size` (number = px, string = any CSS length); do NOT wrap in a sized div. Each icon is also exported as a standalone component from the package root.
-
 ## Typewriter
 
 ```ts

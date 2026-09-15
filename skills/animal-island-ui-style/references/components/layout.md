@@ -74,7 +74,7 @@ type DividerType =
 
 interface DividerProps {
     type?: DividerType; // default 'dashed-brown'
-    icon?: IconName;    // single-icon connected divider (wins over type)
+    icon?: IconComponent; // single-icon connected divider, a React icon component (wins over type)
     iconSize?: number;  // default 24
     iconGap?: number;   // gap width holding a centered 4x2px connector, default 8
     className?: string;

@@ -12,8 +12,8 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 35 components, zero runtime dependencies,
-CC BY-NC 4.0 (non-commercial use only).
+cozy island-style design — 35 components, a single runtime dependency (`naive-icons`
+for icons), CC BY-NC 4.0 (non-commercial use only).
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
 
@@ -64,7 +64,7 @@ values, defaults — copied from source):
 
 | Category | Components | Reference |
 | --- | --- | --- |
-| General | Button, Icon, Typewriter, Cursor | [general.md](references/components/general.md) |
+| General | Button, Typewriter, Cursor | [general.md](references/components/general.md) |
 | Layout | Card, Title, Divider, Collapse, Tabs | [layout.md](references/components/layout.md) |
 | Form controls | Input, Switch, Checkbox, Radio, Select | [form-controls.md](references/components/form-controls.md) |
 | Form container | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
@@ -92,9 +92,9 @@ values, defaults — copied from source):
 8. Fonts are Nunito + Noto Sans SC; weight never below 400; no monospace for UI text
    (CodeBlock excepted).
 9. Motion uses `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
-10. Icons come from `<Icon name="..." />` (101 built-in cute icon names) — never emoji, Unicode
-    symbols (✓ ✕ →), hand-rolled SVG, or third-party icon libraries. In generated projects prefer
-    the built-in `<Icon />` components over emoji everywhere you can.
+10. Icons come from the external `naive-icons` package (e.g. `import { FlowerIcon } from 'naive-icons'`)
+    — never emoji, Unicode symbols (✓ ✕ →), hand-rolled SVG, or third-party icon libraries. Prefer
+    `naive-icons` icon components over emoji everywhere you can.
 11. Select is controlled-only (`options` + `value` + `onChange` all required). Controlled
     `Input`/`Switch`/`Checkbox`/`Radio` need `onChange` too.
 12. Prefer library components over raw HTML: no visible native `<button>`, `<input>`,

@@ -6,18 +6,18 @@ Props/types below are copied from the library source. In an npm-installed projec
 
 ```ts
 interface FooterProps {
-    size?: number; // default 24 — icon size, same as Icon component
-    name?: IconName; // optional single icon; chain just that one icon, else the full 101-icon list
+    text?: string; // copyright text — default 'All Rights Reserved.'
+    year?: number; // year — default current year (dynamically fetched)
     className?: string;
     style?: React.CSSProperties;
 }
 ```
 
 ```tsx
-<Footer />          {/* 101-icon chain, 24px each, fills container width */}
-<Footer size={36} />{/* custom icon size */}
-<Footer name="Heart" />{/* single icon chained */}
+<Footer />                   {/* © 2026 All Rights Reserved. */}
+<Footer text="Acme Ltd." />  {/* custom text */}
+<Footer text="Acme" year={2020} /> {/* custom year */}
 ```
 
-Renders a continuous chain of icons, tightly adjacent (flex items with no gap), repeating to fill the container width via `ResizeObserver`. Default sequence is all 101 built-in icons; pass `name` (an `IconName`) to chain a single icon instead. `size` defaults to 24px, matching the `Icon` component default.
+Renders a copyright bar `© {year} {text}`, centered, `color: #807d75`, `font-size: 12px`, `padding: 16px 0`. The `year` defaults to the current year; the `text` defaults to `All Rights Reserved.`. Both are overridable, and styling can be customized via `style` / `className`.
 
