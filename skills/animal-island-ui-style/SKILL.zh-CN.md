@@ -9,7 +9,7 @@
 
 ## 正文对照
 
-animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 31 个组件、唯一运行时依赖 `naive-icons`（图标）、MIT License
+animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 36 个组件、唯一运行时依赖 `naive-icons`（图标）、MIT License
 
 源码与设计规范定义：https://github.com/guokaigdg/animal-island-ui
 
@@ -50,7 +50,8 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 | --- | --- | --- |
 | 通用 | Button, Typewriter, Cursor | [general.md](references/components/general.md) |
 | 布局 | Card, Title, Divider, Collapse, Tabs, Background, Carousel | [layout.md](references/components/layout.md) |
-| 表单控件 | Input, Switch, Checkbox, Radio, Select, DatePicker, TimePicker | [form-controls.md](references/components/form-controls.md) |
+| 表单控件 | Input, Switch, Checkbox, Radio, Rate, Select | [form-controls.md](references/components/form-controls.md) |
+| 日期时间选择 | DatePicker, TimePicker | [date-time.md](references/components/date-time.md) |
 | 表单容器 | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | 浮层 | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
 | 反馈 | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |
@@ -70,7 +71,7 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 8. 字体 Nunito + Noto Sans SC；字重不低于 400；UI 文字不用等宽字体（CodeBlock 除外）
 9. 动效统一 `cubic-bezier(0.4, 0, 0.2, 1)`，时长 0.15–0.35s
 10. 图标一律使用外部 `naive-icons` 包（如 `import { FlowerIcon } from 'naive-icons'`）—— 不用 emoji、Unicode 符号（✓ ✕ →）、手写 SVG 或第三方图标库。能用到图标的地方优先用 `naive-icons` 图标组件，而非 emoji
-11. Select 仅受控（`options` + `value` + `onChange` 都必填）；受控的 `Input`/`Switch`/`Checkbox`/`Radio` 也要配 `onChange`
+11. Select 仅受控（`options` + `value` + `onChange` 都必填）；受控的 `Input`/`Switch`/`Checkbox`/`Radio`/`Rate` 也要配 `onChange`
 12. 优先用库组件而非裸 HTML：可见 UI 不允许原生 `<button>`、`<input>`、`<select>`、原生 checkbox/radio
 13. 只从包根和 `animal-island-ui/style` 导入，不做深路径导入
 14. 自定义元素用 `var(--animal-*)` token 上色，不硬编码颜色；不用 `className`/`style` 覆盖组件的颜色、圆角、阴影
