@@ -12,7 +12,7 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 36 components, a single runtime dependency (`naive-icons`
+cozy island-style design — 37 components, a single runtime dependency (`naive-icons`
 for icons), MIT License.
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
@@ -67,13 +67,15 @@ values, defaults — copied from source):
 | General | Button, Typewriter, Cursor | [general.md](references/components/general.md) |
 | Layout | Card, Title, Divider, Collapse, Tabs | [layout.md](references/components/layout.md) |
 | Form controls | Input, Switch, Checkbox, Radio, Rate, Select | [form-controls.md](references/components/form-controls.md) |
+| Upload | Upload | [upload.md](references/components/upload.md) |
 | Date & time pickers | DatePicker, TimePicker | [date-time.md](references/components/date-time.md) |
 | Form container | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | Overlays | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
-| Feedback | Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
+| Feedback | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |
 | Notification | Notification (imperative API) | [Notification.md](references/components/Notification.md) |
-| Data display | Table, CodeBlock, Tag | [data-display.md](references/components/data-display.md) |
-| Decorative | Footer, Divider, Cursor, Typewriter | [decorative.md](references/components/decorative.md) |
+| Data display | Table, CodeBlock, Tag, Pagination | [data-display.md](references/components/data-display.md) |
+| Media | Image, Avatar, Carousel | [media.md](references/components/media.md) |
+| Decorative | Footer, Divider, Cursor, Typewriter, Background | [decorative.md](references/components/decorative.md) |
 
 ## Hard rules (violations are bugs)
 

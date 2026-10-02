@@ -9,7 +9,7 @@
 
 ## 正文对照
 
-animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 36 个组件、唯一运行时依赖 `naive-icons`（图标）、MIT License
+animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 37 个组件、唯一运行时依赖 `naive-icons`（图标）、MIT License
 
 源码与设计规范定义：https://github.com/guokaigdg/animal-island-ui
 
@@ -49,15 +49,17 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 | 大类 | 组件 | 参考文件 |
 | --- | --- | --- |
 | 通用 | Button, Typewriter, Cursor | [general.md](references/components/general.md) |
-| 布局 | Card, Title, Divider, Collapse, Tabs, Background, Carousel | [layout.md](references/components/layout.md) |
+| 布局 | Card, Title, Divider, Collapse, Tabs | [layout.md](references/components/layout.md) |
 | 表单控件 | Input, Switch, Checkbox, Radio, Rate, Select | [form-controls.md](references/components/form-controls.md) |
+| 上传 | Upload | [upload.md](references/components/upload.md) |
 | 日期时间选择 | DatePicker, TimePicker | [date-time.md](references/components/date-time.md) |
 | 表单容器 | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | 浮层 | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
 | 反馈 | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |
 | 通知 | Notification（命令式 API） | [Notification.md](references/components/Notification.md) |
-| 数据展示 | Table, CodeBlock, Tag, Pagination, Image | [data-display.md](references/components/data-display.md) |
-| 装饰 | Footer, Divider, Cursor, Typewriter | [decorative.md](references/components/decorative.md) |
+| 数据展示 | Table, CodeBlock, Tag, Pagination | [data-display.md](references/components/data-display.md) |
+| 媒体 | Image, Avatar, Carousel | [media.md](references/components/media.md) |
+| 装饰 | Footer, Divider, Cursor, Typewriter, Background | [decorative.md](references/components/decorative.md) |
 
 ### 硬规则（违反即 bug）
 

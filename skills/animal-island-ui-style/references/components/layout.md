@@ -1,6 +1,7 @@
 # Layout components — props reference
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
+
 ## Card
 
 ```ts
@@ -81,6 +82,7 @@ interface DividerProps {
     style?: React.CSSProperties;
 }
 ```
+
 ```tsx
 <Divider />
 <Divider type="thin" />      // 1px solid hairline, #e8dec7
@@ -89,29 +91,8 @@ interface DividerProps {
 <Divider type="squiggle" />    // theme-teal squiggle, seamless tiled, #19c8b9
 <Divider icon="Fish" />        // icon + centered connector, tiled to fill width
 ```
+
 Height 12px. Purely decorative dashed rule drawn with `linear-gradient` (12px rhythm, 50% on / 50% off) — no image assets. `thin` is a 1px solid rule in `#e8dec7` (height 1px); `hairline` is a 1px dense dashed rule in `#d5c3a2` (6px rhythm); `wave-yellow` is a yellow (#f5d04a) repeating wavy line (40px period, ±7px amplitude, round line-cap); `squiggle` is a theme-teal (#19c8b9) squiggle tiled at a fixed 120px width (`repeat-x`, viewBox 0 0 120 10) whose ends meet at the same height with a horizontal tangent, so tiles join seamlessly without stretching. When `icon` is set, renders a single-icon connected divider (Footer-style tiling, `aria-hidden`): `[icon][gap]` units repeat to fill the width, sized by `iconSize` (default 24) / `iconGap` (default 8), each gap holding a short 4×2px brown connector centered between the two icons; the last icon ends the row without a trailing connector, so both ends are icons. Cycle count recalculated on resize via `ResizeObserver`. No `orientation` / `dashed` / `plain` / children — for a vertical separator, use a CSS `border-left` on adjacent elements.
-
-## Background
-```ts
-type BackgroundType = 'default' | 'grid' | 'dots-dark-green' | 'sprinkles' | 'sweet-corner' | 'coffee-break'
-    | 'dots-pink' | 'dots-purple' | 'dots-blue' | 'dots-yellow' | 'dots-orange' | 'dots-teal'
-    | 'dots-green' | 'dots-red' | 'dots-lime-green' | 'dots-yellow-green' | 'dots-brown' | 'dots-warm-peach-pink';
-
-interface BackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
-    type?: BackgroundType; // default 'default'
-    children?: React.ReactNode;
-}
-```
-
-```tsx
-<Background style={{ height: 200 }} />
-<Background type="dots-dark-green" style={{ height: 200 }} />
-<Background type="sprinkles" style={{ minHeight: 200, padding: 24 }}>
-    <p>Content renders above the pattern</p>
-</Background>
-```
-
-Most types are pattern-only wallpapers with no image assets: `default` is cream `rgb(247,243,223)` with beige polka dots; `grid` is a 24px grid of hairline box rules; `dots-dark-green` is a two-layer offset polka-dot pattern on green `#bfe3bf`; `sprinkles` scatters 6-color cylindrical candy sprinkles (capsule rods with highlight shading) on frosting `#fdf3e3` — three mutually-prime inline-SVG tiles make the scatter read as random with no visible repeat; the other 12 `dots-*` types are pastel polka wallpapers whose base color matches Card's `pattern-*` series (`dots-pink`, `dots-purple`, `dots-blue`, `dots-yellow`, `dots-orange`, `dots-teal`, `dots-green`, `dots-red`, `dots-lime-green`, `dots-yellow-green`, `dots-brown`, `dots-warm-peach-pink`). `sweet-corner` / `coffee-break` draw the 2560×1440 transparent-background scene SVGs (same as Progress `fill` scene variants) with `cover` sizing over a cream base — the SVG URL is injected as `backgroundImage` from the component. No fixed height — set `height` / `min-height` via `style`.
 
 ## Collapse
 
@@ -171,29 +152,3 @@ const [activeKey, setActiveKey] = useState('tab1');
 Supports both controlled and uncontrolled modes, with a smooth fade animation on tab switch.
 
 **Not supported:** no `tabPosition` (always top), no `type="card"` / `type="editable-card"`, no `tabBarExtraContent`, no closable tabs.
-
-## Carousel
-
-```ts
-interface CarouselProps extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'> {
-    children: React.ReactNode; // REQUIRED; each direct child is one slide
-    activeIndex?: number;
-    defaultActiveIndex?: number; // default 0
-    onChange?: (index: number) => void;
-    autoplay?: boolean; // default false
-    interval?: number; // default 3000
-    loop?: boolean; // default true
-    showArrows?: boolean; // default true
-    showDots?: boolean; // default true
-    pauseOnHover?: boolean; // default true; focus also pauses
-}
-```
-
-```tsx
-<Carousel autoplay aria-label="岛屿照片">
-    <img src="/beach.jpg" alt="海滩" />
-    <img src="/plaza.jpg" alt="广场" />
-</Carousel>
-```
-
-Supports controlled/uncontrolled indexes, CSS fade transitions, looping, arrows, dots and ArrowLeft/ArrowRight/Home/End navigation. Autoplay automatically renders a pause/resume control and pauses on hover/focus. Set a useful `aria-label`; every slide receives a position/count label automatically.
