@@ -2,7 +2,7 @@
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
 
-Covers: Table, Pagination, CodeBlock, Tag.
+Covers: Table, Pagination, CodeBlock, Tag, Badge.
 
 ## Table
 
@@ -122,3 +122,41 @@ interface TagProps {
 ```
 
 Notes: color palette exactly matches `Card` — 12 brand colors + 1 default. `solid` saturated bg + white text; `outlined`/`dashed` same color text + border on transparent; `soft` pastel bg + deeper same-hue text, no border; `default` is the parchment-pill neutral (`rgb(247,243,223)` bg, `#8f734f` text). Sizes (class `size-{size}`): small 24 / medium 32 / large 40px, font 12/14/16, all `border-radius: 999px`, `font-weight: 600`, 1.5px transparent border. `closable` renders a × button (`aria-label="close"`, 16×16 circle bg, click is `stopPropagation`'d). `onClick` upgrades to `<span role="button" tabIndex={0}>` with Enter/Space support. `disabled` = `opacity: 0.5` + `pointer-events: none`.
+
+## Badge
+
+```ts
+type BadgeSize = 'small' | 'medium';
+type BadgeColor = 'app-red' | 'app-pink' | 'app-orange' | 'app-yellow' | 'app-teal' | 'app-green' | 'app-blue' | 'purple' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink';
+interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+    count?: React.ReactNode; // number / string, or any ReactNode (e.g. a naive-icons glyph)
+    overflowCount?: number; // default 99 — values above render as `${overflowCount}+`
+    showZero?: boolean; // default false — also show the badge when the value is 0
+    dot?: boolean; // default false — a bare dot instead of the number
+    size?: BadgeSize; // default 'medium' — numeric pill only
+    color?: BadgeColor; // default 'app-red'
+    children?: React.ReactNode; // the wrapped element; omit for standalone use
+}
+```
+
+```tsx
+<Badge count={5}>
+    <Avatar shape="square" size="large">
+        <BellIcon size={24} />
+    </Avatar>
+</Badge>
+
+<Badge count={0} showZero>
+    <Avatar shape="square" size="large">零</Avatar>
+</Badge>
+
+<Badge count={100} overflowCount={99} />   {/* standalone → renders "99+" */}
+<Badge count="新" color="app-orange" />    {/* non-numeric renders verbatim */}
+<Badge dot color="app-green">
+    <BellIcon size={26} />
+</Badge>
+<Badge count={5} size="small" color="app-blue" />
+```
+
+Notes: colours are the shared Card / Tag palette — there is **no** free-form CSS colour prop. The indicator is a `<sup>` pinned to the wrapped element's top-right corner over a 2px cream ring; omit `children` for a standalone badge (ring, shadow and offset are dropped). Hidden when `count` is empty (`null` / `undefined` / blank string) or `0` / `"0"` without `showZero`; `dot` with a zero value is hidden too, but `dot` without a `count` still shows. Numbers and numeric strings are capped at `overflowCount` (default 99 → `99+`); the true value stays in the native `title` (an explicit `title` prop overrides it) and a ReactNode `count` is never capped. Sizes: `medium` 20px pill / `small` 16px pill; `dot` is a fixed 10px box. It is a passive display element (`<span>` wrapper) — no `onClick`, no interactive states.
+
