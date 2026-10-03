@@ -92,7 +92,7 @@ interface FormItemProps {
     getValueFromEvent?: (event: unknown) => unknown;
     normalize?: (value: unknown, prevValue: unknown, prevAllValues: Record<string, unknown>) => unknown;
     hidden?: boolean; // default false — render nothing (still registered)
-    hasFeedback?: boolean; // default false — show ✕ icon on error
+    hasFeedback?: boolean; // default false — show a `naive-icons` CloseIcon on error
     validateStatus?: ValidateStatus; // override inferred status
     help?: React.ReactNode; // shown when no error
     noStyle?: boolean; // default false — skip label/wrapper shell, only clone children

@@ -4,7 +4,7 @@ Props/types below are copied from the library source. In an npm-installed projec
 
 ## Progress
 
-Horizontal bar whose fill defaults to a **solid teal** (`#19c8b9`); when a `variant` is passed it becomes a **scene image** (`sweet-corner.svg`, `forest-grove.svg`, …) injected inline at `background-size` equal to the full track width, so the scene spans the whole bar; the fill is clipped from the left by progress width ("unveils from the left"). The track is a **cream dotted** pill (`#f8f8f0` + two cream radial-dot layers, same as Background default / Card pattern-default) with a soft inner dent and no border. The percent label always sits **right of the bar**.
+Horizontal bar whose fill defaults to a **mint vertical gradient** (`#3dd4c6 → #19c8b9 → #14b6a8`, top-lit, plus a `rgba(255,255,255,0.45)` inner highlight); when a `variant` is passed it becomes a **scene image** (`sweet-corner.svg`, `forest-grove.svg`, …) injected inline at `background-size` equal to the full track width, so the scene spans the whole bar; the fill is clipped from the left by progress width ("unveils from the left"). The track is a **cream pill** (`#f8f8f0`) carrying the old wallpaper track's fine dot texture — 1.5px-radius dots on a 14px grid, `rgba(196,184,158,0.1)`, base unchanged — inside a solid 2px sand outline (`#e2d6bd`); `box-sizing: border-box` means `size` is the total height including the border, so the dot radius is 1.5px rather than the pre-outline 1px to stay legible in the 4px the border takes. At `percent=100` the gradient fill brightens to `#7fe0d5 → #3dd4c6` so a full bar reads as finished, not loading. The percent label always sits **right of the bar**.
 
 ```ts
 type ProgressSize = 'small' | 'middle' | 'large';
@@ -14,7 +14,7 @@ interface ProgressProps {
     percent: number; // REQUIRED, 0-100, clamped; non-integer rounded for aria
     size?: ProgressSize; // default 'middle' (small=14px, middle=24px, large=32px)
     showInfo?: boolean; // default true; label sits right of the bar
-    variant?: ProgressVariant; // fill scene image; omit to use solid #19c8b9
+    variant?: ProgressVariant; // fill scene image; omit to use the mint gradient
     infoFormat?: (percent: number) => React.ReactNode; // default `${percent}%`
     duration?: number; // fill WIDTH transition in seconds; 0 disables; default 0.6
     className?: string;
@@ -24,7 +24,7 @@ interface ProgressProps {
 
 ```tsx
 <Progress percent={50} size="large" />
-<Progress percent={45} variant="forest-grove" />          {/* no variant = solid #19c8b9 fill */}
+<Progress percent={45} variant="forest-grove" />          {/* no variant = mint gradient fill */}
 <Progress percent={50} infoFormat={(p) => `${Math.round(p / 10)} / 10`} />
 <Progress percent={pct} duration={0} />                   {/* no fill-width animation */}
 <Progress percent={66} showInfo={false} />
