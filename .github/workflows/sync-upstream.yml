@@ -2,8 +2,8 @@ name: Sync upstream animal-island-ui skill
 
 on:
   schedule:
-    # Check the upstream repository every hour.
-    - cron: "0 * * * *"
+    # Check the upstream repository every 24 hours.
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
