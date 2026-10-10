@@ -64,7 +64,7 @@ Notes:
 - **Exit sequence**: `active` → false keeps the screen mounted with an `exiting` class (opacity → 0, `pointer-events: none`); a `fadeDuration * 1000` ms timer then unmounts it. Restoring `active` mid-fade cancels the timer and snaps back to opaque instantly.
 - **`delay` prevents flash**: the timer re-arms on every `active` → `true` transition, so a 600ms load with `delay={300}` barely flickers.
 - **Flakes are generated once per mount** (`useMemo`): random size 1–6px, `left` 0–100%, duration 6–12s, and a *negative* delay that starts each flake mid-cycle so the first frame is already full of snow instead of waiting up to 10s.
-- **A11y**: the root carries `role="status"`; the snowfall wrapper and vignette are `aria-hidden`; without `tip`, a visually-hidden `加载中` span provides the accessible content. `prefers-reduced-motion: reduce` stops the falling animation but keeps the opacity fade.
+- **A11y**: the root carries `role="status"`; the snowfall wrapper and vignette are `aria-hidden`; without `tip`, a visually-hidden `加载中` span provides the accessible content. Under `prefers-reduced-motion: reduce` the snowfall is **paused rather than removed** — never use `animation: none` here: the flakes' only source of visibility is the animation and their static position is `top: -30px`, above the viewport, so removing it leaves a bare black backdrop. The built-in negative `animation-delay` is what makes pausing useful: each flake freezes at a random point along its fall, producing a static snow scene that fills the viewport. The opacity fade is kept since it is not motion.
 
 ## Skeleton
 
