@@ -115,7 +115,7 @@ Notes:
 
 ## BackTop
 
-Floating back-to-top button that appears in the bottom-right corner after scrolling past a threshold. Default icon is an original sticker-style up-arrow SVG (inline data URI, 64px, with drop-shadow elevation); clicking smooth-scrolls to the top with an easeInOutQuad animation.
+Floating back-to-top button that appears in the bottom-right corner after scrolling past a threshold. Default icon is `RocketIcon` from `naive-icons` rendered at `size={64}` (cream `#FAEDCD` fuselage, teal `#2A9D8F` porthole, `#E76F51` flame and fins, ink `#2A2A2A` stroke) with a drop-shadow elevation; clicking smooth-scrolls to the top with an easeInOutQuad animation. There is no icon prop — the rocket is fixed, and per the icon rule it comes from `naive-icons` rather than a local asset.
 
 ```ts
 interface BackTopProps {

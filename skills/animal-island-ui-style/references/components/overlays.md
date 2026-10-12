@@ -38,6 +38,7 @@ const [open, setOpen] = useState(false);
 Notes:
 
 - Modal already ships the required SVG blob `<clipPath id="animal-modal-clip">` internally.
+- `prefers-reduced-motion: reduce` drops the panel's `scale(0.92) → scale(1)` zoom-in — that is exactly the kind of motion the setting exists to suppress. The panel then renders at its resting `scale(1)`, so it never appears mid-flight or invisible. The mask's plain opacity fade is not motion and is kept.
 - To disable the typewriter animation for dynamic content: `typewriter={false}`.
 - Custom footer: pass `footer={<><Button>...</Button></>}` or `footer={null}` to hide.
 - `title` accepts a `ReactNode` — pass plain text. Do NOT pass `<Title>` here.
@@ -72,7 +73,9 @@ const [open, setOpen] = useState(false);
 
 Notes:
 
-- `pushBackground` (default `true`) is the signature effect: when open, all non-fixed direct children of `document.body` are translated `translateY(24px) scale(0.96)` with `brightness(0.85)`, making the drawer float above a "sunken" page. Fixed-position elements (other overlays, portals) are auto-excluded. Set `pushBackground={false}` for a normal flat-mask drawer.
+- `pushBackground` (default `true`) is the signature effect: when open, every non-fixed direct child of `document.body` gets `transform: scale(0.94)`, `border-radius: 14px` and `overflow: hidden` over 0.36s `cubic-bezier(0.2, 0, 0.2, 1)`, making the drawer float above a "sunken" page. Fixed-position elements (other overlays, portals) are auto-excluded, as are `[data-animal-drawer-ignore]` and the component's own portal wrapper. Set `pushBackground={false}` for a normal flat-mask drawer.
+- **Do not add `filter: blur()` to the pushed background.** `filter` is a non-composited property: it forces a fresh composited layer plus a per-pixel gaussian blur over the whole viewport for every background element. The symptom is a visible stall on the *first* open (layers are cold and must be rasterized from scratch) while later opens feel fine. The depth read comes from `scale` + rounded corners + the dimming mask; a 1px blur contributes almost nothing visually. Pair this with `will-change: transform` on the pushed elements so layer promotion happens before the transition starts rather than mid-animation.
+- `prefers-reduced-motion: reduce` disables **both** the background push (sunken scale) **and** the panel's own slide-in transition — the same treatment `Modal` gives its zoom-in. The panel lands directly on `transform: none`, so it never stops mid-flight or invisible. Keep the mask's opacity transition: plain opacity is not motion.
 - The mask uses a light black `rgba(0,0,0,0.18)` (lighter than Modal's 0.35) so the sunken background remains visible — this is what makes the depth readable.
 - Drawer has NO built-in typewriter (unlike Modal). Pass any content directly.
 - Default footer is **none** (unlike Modal's 取消/确定). Pass `footer={<><Button>...</Button></>}` for confirm-style actions.

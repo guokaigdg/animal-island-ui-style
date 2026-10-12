@@ -35,7 +35,7 @@ For a real React project, use [react-project.md](react-project.md) instead.
 - Page code in one `<script type="text/babel" data-presets="react,typescript">` block;
   mount on `<div id="root"></div>` via `ReactDOM.createRoot(...).render(<App />)`.
 - All CSS inline in one `<style>` block in `<head>`: design tokens on `:root` first (from
-  the fetched template), then component classes. No CSS frameworks; Tailwind is forbidden.
+  the fetched template), then component classes. No CSS frameworks of any kind.
 - Inject the Modal SVG `<defs>` clip-path block once at the top of `<body>` so
   `clip-path: url(#animal-modal-clip)` resolves (exact path data is in the overlays pixel spec).
 - Fonts from Google Fonts — Nunito (400–900) + Noto Sans SC (400/500/700):
