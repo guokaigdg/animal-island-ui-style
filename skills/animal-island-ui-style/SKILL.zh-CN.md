@@ -73,7 +73,7 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 7. Modal 必须保留 SVG blob clip-path，不可换圆角矩形；Title 是燕尾飘带，不是 blob/pill/普通块（`Card type="title"` 已不存在）。**Title 默认用 `variant="ribbon"`**（燕尾横幅），不用缺省的 `layer`
 8. 字体 Nunito + Noto Sans SC；字重不低于 400；UI 文字不用等宽字体（CodeBlock 除外）
 9. 动效统一 `cubic-bezier(0.4, 0, 0.2, 1)`，时长 0.15–0.35s
-10. 图标一律使用外部 `naive-icons` 包（如 `import { FlowerIcon } from 'naive-icons'`）—— 不用 emoji、Unicode 符号（✓ ✕ →）、手写 SVG 或第三方图标库。能用到图标的地方优先用 `naive-icons` 图标组件，而非 emoji
+10. 图标一律使用外部 `naive-icons` 包（如 `import { FlowerIcon } from 'naive-icons'`）—— 不用 emoji、Unicode 符号（✓ ✕ →）、手写 SVG 或第三方图标库。能用到图标的地方优先用 `naive-icons` 图标组件，而非 emoji。唯一例外是 `Cursor`：它的图形必须手写内联 SVG，因为 CSS `cursor` 只接受图片 URL —— 别去动它
 11. Select 仅受控（`options` + `value` + `onChange` 都必填）；受控的 `Input`/`Switch`/`Checkbox`/`Radio`/`Rate` 也要配 `onChange`
 12. 优先用库组件而非裸 HTML：可见 UI 不允许原生 `<button>`、`<input>`、`<select>`、原生 checkbox/radio
 13. 只从包根和 `animal-island-ui/style` 导入，不做深路径导入

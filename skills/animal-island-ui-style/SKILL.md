@@ -98,7 +98,8 @@ values, defaults — copied from source):
 9. Motion uses `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 10. Icons come from the external `naive-icons` package (e.g. `import { FlowerIcon } from 'naive-icons'`)
     — never emoji, Unicode symbols (✓ ✕ →), hand-rolled SVG, or third-party icon libraries. Prefer
-    `naive-icons` icon components over emoji everywhere you can.
+    `naive-icons` icon components over emoji everywhere you can. `Cursor` is the single exception: its
+    artwork is hand-authored inline SVG because CSS `cursor` accepts image URLs only — leave it alone.
 11. Select is controlled-only (`options` + `value` + `onChange` all required). Controlled
     `Input`/`Switch`/`Checkbox`/`Radio`/`Rate` need `onChange` too.
 12. Prefer library components over raw HTML: no visible native `<button>`, `<input>`,
