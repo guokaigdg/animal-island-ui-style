@@ -19,7 +19,7 @@ interface DatePickerProps {
     allowClear?: boolean; // default false
     size?: DatePickerSize; // default 'middle'
     status?: DatePickerStatus;
-    format?: string; // default 'YYYY-MM-DD'; tokens YYYY / MM / DD / M / D
+    format?: string; // default 'YYYY-MM-DD'; core dayjs tokens (YYYY / MM / DD / M / D / HH / mm / ss / ddd); plugin tokens such as Q need that plugin registered
     disabledDate?: (date: Date) => boolean;
     picker?: 'date' | 'month'; // default 'date' — 'month' opens the month grid and commits YYYY-MM
     open?: boolean; // controlled open state
@@ -36,7 +36,7 @@ interface DatePickerProps {
 <DatePicker range value={range} onChange={setRange} disabledDate={d => d.getDay() === 0} />
 ```
 
-Calendar popup date picker. The value is a plain `YYYY-MM-DD` string — no date library, zero runtime deps. Click the year-month label to switch to year / month selection; `disabledDate` disables any date (weekends etc.); `range` renders two linked month panels for a start & end date. Picking sets a pending value shown live in the trigger; `确定` commits and closes, Esc / click-outside discards. Keyboard: Enter/Space/ArrowDown opens, arrows move the focus date, Enter sets the pending date, Esc closes, PageUp/PageDown flips months.
+Calendar popup date picker. The value is a plain `YYYY-MM-DD` string; the panel's date arithmetic runs on `dayjs`, and strict parsing rejects impossible dates such as `2026-02-30` instead of rolling them over. `format` takes core dayjs tokens — plugin-owned tokens such as `Q` render literally, since only `customParseFormat` is registered. Click the year-month label to switch to year / month selection; `disabledDate` disables any date (weekends etc., it always receives a native `Date`); `range` renders two linked month panels for a start & end date. Picking sets a pending value shown live in the trigger; `确定` commits and closes, Esc / click-outside discards. Keyboard: Enter/Space/ArrowDown opens, arrows move the focus date, Enter sets the pending date, Esc closes, PageUp/PageDown flips months.
 
 ## TimePicker
 
