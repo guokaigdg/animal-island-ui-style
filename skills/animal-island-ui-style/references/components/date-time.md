@@ -54,7 +54,7 @@ interface TimePickerProps {
     allowClear?: boolean; // default false
     size?: TimePickerSize; // default 'middle'
     status?: TimePickerStatus;
-    format?: string; // default 'HH:mm:ss'; tokens HH / mm / ss; ss shows the seconds column
+    format?: string; // default 'HH:mm:ss'; dayjs core time tokens (HH / mm / ss / h / A); ss shows seconds
     hourStep?: number; // default 1
     minuteStep?: number; // default 1
     secondStep?: number; // default 1
@@ -69,4 +69,4 @@ interface TimePickerProps {
 <TimePicker value={time} onChange={setTime} minuteStep={15} allowClear />
 ```
 
-Time popup picker with hour / minute / second scroll columns; picking updates the pending value live in the trigger; `此刻` sets the current time, `确定` commits (`onChange`) and closes; Esc / click-outside discard. Enter/Space opens, Enter confirms, Esc closes.
+Time popup picker with hour / minute / second scroll columns; picking updates the pending value live in the trigger; `此刻` sets the current time, `确定` commits (`onChange`) and closes; Esc / click-outside discard. Enter/Space opens, Enter confirms, Esc closes. `format` follows dayjs core time tokens (same contract as DatePicker): `h:mm A` and `[literal]` render, plugin tokens stay literal. The value carries no date, so date tokens render the internal `2000-01-01` anchor; parsing still accepts 1- or 2-digit fields and an omitted seconds field.
