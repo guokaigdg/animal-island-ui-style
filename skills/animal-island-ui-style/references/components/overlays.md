@@ -42,6 +42,7 @@ Notes:
 - To disable the typewriter animation for dynamic content: `typewriter={false}`.
 - Custom footer: pass `footer={<><Button>...</Button></>}` or `footer={null}` to hide.
 - `title` accepts a `ReactNode` — pass plain text. Do NOT pass `<Title>` here.
+- **Modal chrome is not selectable; only the body is.** The mask, header, title, close × and footer carry `user-select: none`, the body carries `user-select: text` (content stays copyable). Keep it that way in any custom skin: without it, double-clicking the title selects a word, and the warm `::selection` colour paints a stray highlight inside the popup.
 
 ## Drawer
 
@@ -80,6 +81,7 @@ Notes:
 - Drawer has NO built-in typewriter (unlike Modal). Pass any content directly.
 - Default footer is **none** (unlike Modal's 取消/确定). Pass `footer={<><Button>...</Button></>}` for confirm-style actions.
 - A close × button is rendered in the header when `title` is provided. Esc / mask click also close.
+- **Panel chrome is not selectable; only the body is.** The mask, header, title, close × and footer carry `user-select: none`, the body carries `user-select: text` (content stays copyable). Keep it that way in any custom skin: without it, double-clicking the title selects a word, and double-clicking the trigger to open the drawer drops a selection onto the sliding-in panel, which the warm `::selection` colour paints as a stray highlight inside the popup.
 - a11y: `role="dialog"`, `aria-modal="true"`, `aria-labelledby` on title, focus trap + focus restore (same pattern as Modal).
 
 ## Tooltip
