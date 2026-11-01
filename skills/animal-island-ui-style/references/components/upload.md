@@ -2,9 +2,21 @@
 
 File upload with a cream-capsule trigger (text mode) or a dashed drop zone (`drag`), plus a file list in two shapes: `text` rows and `picture-card` image tiles. Give it an `action` URL to upload via the built-in **XMLHttpRequest** (progress + cancel), or pass `customRequest` for full control. With neither, the component **simulates upload progress** with a timer (~1.5s to done), so UIs can be built before the real endpoint exists.
 
+`progress` defaults to `false`, preserving the original spinner and percentage. Passing an object enables progress: `type="bar"` (the object default) reuses small 14px Progress, 6px below the filename in text / picture rows with 11px info; picture cards have 8px side insets and white percentage text above the bar. `type="background"` fills the entire file-item background left-to-right according to percentage without an extra bar. The fill uses `var(--animal-primary-color, #19c8b9)` with opacity 0.28 and clips to the item radius; picture cards use a cream mask at opacity 0.88 to keep text readable. Both modes support `color / wave / animated / showInfo / duration`, follow `file.percent` (missing or NaN becomes 0, clamped to 0–100), and appear only while uploading. The background progress node stays separate from action buttons and has a file-specific accessible name; reduced motion stops waves and width transitions.
+
+```tsx
+<Upload progress={{ type: 'background', wave: true }} />
+<Upload progress={{ type: 'bar', wave: true, color: '#82d5bb' }} />
+<Upload /> // original spinner and percentage
+```
+
 ```ts
 type UploadFileStatus = 'uploading' | 'done' | 'error' | 'removed';
 type UploadListType = 'text' | 'picture' | 'picture-card';
+type UploadProgressType = 'bar' | 'background';
+interface UploadProgressConfig extends Pick<ProgressProps, 'color' | 'wave' | 'animated' | 'showInfo' | 'duration'> {
+    type?: UploadProgressType; // default 'bar'
+}
 
 interface UploadFile {
     uid: string;               // unique id, tracked internally
@@ -37,6 +49,7 @@ interface UploadProps {
     defaultFileList?: UploadFile[];
     listType?: UploadListType;  // default 'text'
     showUploadList?: boolean | UploadShowUploadList; // default true
+    progress?: false | UploadProgressConfig;
     onPreview?: (file: UploadFile) => void; // click preview (picture / picture-card thumb / text image)
     drag?: boolean;             // default false
     tip?: React.ReactNode;      // hint below the trigger

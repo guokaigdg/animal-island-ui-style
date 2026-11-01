@@ -15,6 +15,9 @@ interface ProgressProps {
     size?: ProgressSize; // default 'middle' (small=14px, middle=24px, large=32px)
     showInfo?: boolean; // default true; label sits right of the bar
     variant?: ProgressVariant; // fill scene image; omit to use the mint gradient
+    color?: string;
+    wave?: boolean;
+    animated?: boolean;
     infoFormat?: (percent: number) => React.ReactNode; // default `${percent}%`
     duration?: number; // fill WIDTH transition in seconds; 0 disables; default 0.6
     className?: string;
@@ -37,6 +40,13 @@ Notes:
 - **Fill scene image is fixed per `variant`** — there is no `status` / `strokeColor` / `leafAnimated` prop.
 - **Fill width transition** animates on `percent` change (`duration` prop, default 0.6s, `0` disables) with `cubic-bezier(0.4, 0, 0.2, 1)`; disabled under `prefers-reduced-motion: reduce`.
 - **Accessibility**: root has `role="progressbar"` with `aria-valuemin=0`, `aria-valuemax=100`, `aria-valuenow=<rounded percent>`, and `aria-valuetext` set to the rendered text when it's a string.
+
+`color` accepts a CSS color or variable with a translucent top highlight and bottom shade; it retains the chosen hue at 100%. `variant` takes precedence over `color`; omitting both preserves the original mint gradient. `wave` defaults to `false` and adds two white wave layers inside the fill, composable with colors and scenes. `animated` defaults to `true`; false or 0% / 100% keeps the waves static. Loops pause offscreen or when hidden and stop under reduced motion. `duration` controls width transitions only.
+
+```tsx
+<Progress percent={58} color="#82d5bb" wave />
+<Progress percent={58} wave animated={false} />
+```
 
 ## Loading
 
@@ -143,27 +153,7 @@ Notes:
 
 ## Countdown
 
-```ts
-type CountdownSize = 'small' | 'middle' | 'large';
-type CountdownVariant = 'default' | 'island';
-interface CountdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'prefix'> {
-    value: number | Date; // REQUIRED — absolute deadline
-    format?: string; // default 'HH:mm:ss'; DD / HH / mm / ss tokens
-    prefix?: React.ReactNode;
-    size?: CountdownSize; // default 'middle'
-    variant?: CountdownVariant; // default 'default'
-    bordered?: boolean; // default false — draws the 1.5px digit-tile borders
-    onChange?: (remaining: number) => void;
-    onFinish?: () => void;
-}
-```
-
-```tsx
-<Countdown value={Date.now() + 60_000} />
-<Countdown value={deadline} format="DD 天 HH:mm:ss" prefix="活动结束还有" variant="island" />
-```
-
-The remaining time never drops below zero and `onFinish` fires once. Without a `DD` token, `HH` is total hours; with `DD`, hours are the 0–23 remainder. Each DD / HH / mm / ss token renders as its own 12px-radius digit tile; every digit inside is a vertical strip of two 0-9 cycles that always rolls downward to the current value with a 0.35s transition (odometer style — wrapping past 0 teleports to the next cycle and keeps rolling down, never reversing). Format literals such as `:` or `天` render as plain separators. The rolling strips are `aria-hidden`; a visually-hidden span carries the full formatted value. The root is `role="timer"` with `aria-live="off"`.
+See [countdown.md](countdown.md) for the full API, color reminders and final-seconds shaking.
 
 ## Time
 

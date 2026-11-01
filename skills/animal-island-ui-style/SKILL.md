@@ -12,7 +12,7 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 40 components, two runtime dependencies (`naive-icons`
+cozy island-style design — 42 components, two runtime dependencies (`naive-icons`
 for icons, `dayjs` for dates), MIT License.
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
@@ -74,10 +74,14 @@ values, defaults — copied from source):
 | Feedback | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |
 | Notification | Notification (imperative API) | [Notification.md](references/components/Notification.md) |
 | Data display | Table, CodeBlock, Tag, Badge, Pagination | [data-display.md](references/components/data-display.md) |
+| Charts | Chart (19 types) | [charts.md](references/components/charts.md) |
+| Empty state | NoData | [no-data.md](references/components/no-data.md) |
 | Calendar | Calendar | [calendar.md](references/components/calendar.md) |
 | Count-up score | CountUp | [CountUp.md](references/components/CountUp.md) |
 | Media | Image, Avatar, Carousel | [media.md](references/components/media.md) |
 | Decorative | Footer, Divider, Cursor, Typewriter, Background | [decorative.md](references/components/decorative.md) |
+
+When a chart request uses an English demo label, resolve it through [Chart type selection](references/components/charts.md#demo-labels-and-type-selection) before choosing `type`. The linked data and interaction references cover input shapes and tooltip configuration.
 
 ## Hard rules (violations are bugs)
 

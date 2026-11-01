@@ -15,7 +15,8 @@ import 'animal-island-ui/style'; // MUST be imported before any component render
 // Fonts (Nunito / Noto Sans SC) are bundled via @fontsource — no Google Fonts link needed.
 ```
 
-Peer requirements: `react >= 17`, `react-dom >= 17` (plus `classnames` as a peer dependency).
+Peer requirements: `react >= 18`, `react-dom >= 18` (plus `classnames` as a peer dependency).
+Components use React 18 APIs such as `useId`; React 17 is not supported.
 The build supports per-component tree-shaking — import from the package root only.
 
 ## Explore the real API before writing code
